@@ -35,8 +35,7 @@ public class DebuggerInstrument extends TruffleInstrument {
             }
         });
 
-//        int breakpointLine = askLineNumber();
-        int breakpointLine = 8;
+        int breakpointLine = 8; // Set breakpoint line here cuz I'm a lazy koala.
 
         // TODO: Find out how to get Context here
         //  Otherwise, just use attachLoadSourceListener for it?
@@ -51,17 +50,5 @@ public class DebuggerInstrument extends TruffleInstrument {
 
     @Override
     protected void onDispose(Env env) {
-    }
-
-    private int askLineNumber() {
-        Scanner reader = new Scanner(System.in);
-
-        System.out.print("Which line to debug?");
-
-        int n = reader.nextInt();
-        reader.close();
-
-        System.out.print("\n");
-        return n;
     }
 }

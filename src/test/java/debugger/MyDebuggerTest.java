@@ -46,8 +46,6 @@ public class MyDebuggerTest extends AbstractInstrumentationTest {
                 "STATEMENT(CALL(bar)),", // 8
                 "STATEMENT(CALL(bar)))"); // 9
 
-        // TODO: Study Truffle functions
-
         run(source);
     }
 }
