@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'antlr'
+}
+
+//sourceSets.main.java.srcDirs = ['src/main/gen','src/main/java']
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+// These arguments are required because of the JVM 11's module system -
+// we grant this module access to the packages from the Truffle API JAR
+test {
+    jvmArgs '-ea',
+            '--add-exports',
+            'org.graalvm.truffle/com.oracle.truffle.api=ALL-UNNAMED',
+            '--add-exports',
+            'org.graalvm.truffle/com.oracle.truffle.api.nodes=ALL-UNNAMED',
+            '--add-exports',
+            'org.graalvm.truffle/com.oracle.truffle.api.dsl=ALL-UNNAMED',
+            '--add-exports',
+            'org.graalvm.truffle/com.oracle.truffle.api.instrumentation=ALL-UNNAMED',
+            '--add-exports',
+            'org.graalvm.truffle/com.oracle.truffle.api.interop=ALL-UNNAMED',
+            '--add-exports',
+            'org.graalvm.truffle/com.oracle.truffle.api.library=ALL-UNNAMED',
+            '--add-exports',
+            'java.base/jdk.internal.module=ALL-UNNAMED',
+            '-Dgraalvm.locatorDisabled=true'
+
+}
+
+ext {
+    graal_version = '22.0.0.2'
+}
+
+dependencies {
+//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation 'junit:junit:4.13.2'
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+//    implementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    implementation 'junit:junit:4.13.2'
+    implementation "org.graalvm.truffle:truffle-api:$graal_version"
+    annotationProcessor "org.graalvm.truffle:truffle-dsl-processor:$graal_version"
+
+    antlr 'org.antlr:antlr4:4.9.3'
+}
